@@ -31,7 +31,7 @@ function UiTournir(props: PropsModalWindow) {
                     <p>{props.players} игрока</p>
                 </div>
             </div>
-            <p>Подробнее</p>
+            <p className={Style.more}>Подробнее</p>
         </div>
     );
 }

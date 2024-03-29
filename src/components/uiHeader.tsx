@@ -30,6 +30,7 @@ function UiHeader() {
 
         <nav className={Style.nav}>
         
+            <button onClick={handleModal}>Регистрация</button>
             <button onClick={handleModal}>Войти</button>
             {/* <button onClick={handleSendAutorizate}>Создать матч</button> */}
         

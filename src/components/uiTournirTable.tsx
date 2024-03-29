@@ -7,7 +7,7 @@ function UiTournirTable() {
   return (
     <main className={Style.content}>
         <div className={[globalStyle.wrapper, Style.wrapper].join(" ")}>
-            <h1>cписок туриниров</h1>
+            <h1>cписок последних турниров</h1>
             <hr />
             <UiTournir 
                 name = "Белые медведи"

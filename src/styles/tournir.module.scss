@@ -61,6 +61,13 @@
         font-size: 2rem;
         text-align: center;
     }
+    & .more {
+        transition: 0.2s all cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        opacity: 0;
+    }
+    &:hover .more {
+        opacity: 1;
+    }
     & .body {
         width: 50%;
         display: flex;
@@ -131,7 +138,15 @@
             gap: 10px;
             & .element {
                 width: 100%;
+                height: auto;
                 flex-direction: row;
+                & p {
+                    font-size: 1.5rem;
+                }
+                & svg {
+                    width: 40px;
+                    height: 40px;
+                }
             }
         }
     }

@@ -1,5 +1,8 @@
 import Modal from '@mui/material/Modal';
 import Style from '../../styles/login.module.scss';
+import { useState } from 'react';
+import axios from 'axios';
+import { FormEvent } from 'react';
 
 type PropsModalWindow = {
     isOpen: boolean,
@@ -7,6 +10,27 @@ type PropsModalWindow = {
 };
 
 function Login(props: PropsModalWindow) {
+    const [username,setUsername] = useState("");
+    const [password,setPassword] = useState("");
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        postData()
+    };
+
+    const postData = async () => {
+        try {
+            const response = await axios.post('http://188.225.34.199:8000/auth', {
+                username: {username},
+                password: {password}
+            });
+    
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+
     return (
         <Modal
             open={props.isOpen}
@@ -16,17 +40,31 @@ function Login(props: PropsModalWindow) {
         >
                 <div className={Style.container}>
                     <h2>Авторизация</h2>
-                    <form className={Style.formGroup} id="loginForm">
-                        <div className={Style.formGroup}>
-                            <label htmlFor="username">Username:</label>
-                            <input type="text" id="username" name="username" required />
+                    <form className={Style.formGroup} id="loginForm" onSubmit={handleSubmit}>
+                        <div className={Style.formChild}>
+                            <input 
+                                type="text" 
+                                id="username" 
+                                name="username"
+                                placeholder='Имя пользователя'
+                                onChange={(e) => {setUsername(e.target.value.replace(/[^\w\s]/g,''))}} 
+                                value={username}
+                                required 
+                            />
                         </div>
-                        <div className={Style.formGroup}>
-                            <label htmlFor="password">Password:</label>
-                            <input type="password" id="password" name="password" required />
+                        <div className={Style.formChild}>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                placeholder='Пароль' 
+                                onChange={(e) => {setPassword(e.target.value.replace(/[^\w\s]/g,''))}} 
+                                value={password}
+                                required 
+                            />
                         </div>
-                        <div className={Style.formGroup}>
-                            <button type="submit">Login</button>
+                        <div className={Style.formChild}>
+                            <button type="submit">Войти</button>
                         </div>
                     </form>
                 </div>
