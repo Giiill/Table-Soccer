@@ -1,6 +1,10 @@
+import Style from "./styles/app.module.scss";
+import UiHeader from "./components/uiHeader";
+
 function App() {
   return (
-    <div className="App">
+    <div className={Style.app}>
+      <UiHeader />
     </div>
   );
 }
