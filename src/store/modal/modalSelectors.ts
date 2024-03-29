@@ -1,1 +1,6 @@
-export const selectModalStatus = (state: { modalSlice: { isOpen: boolean } }) => state.modalSlice.isOpen;
+export type ModalState = {
+    isAuthModalOpen: boolean;
+    isRegisterModalOpen: boolean;
+  };
+  
+  export const selectModalStatus = (state: { modalSlice: ModalState }) => state.modalSlice;
