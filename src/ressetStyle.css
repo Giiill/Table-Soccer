@@ -23,6 +23,7 @@ body {
 	min-width: 100vw;
 	min-height: 100vh;
 	line-height: 1;
+    overflow-x: hidden;
 }
 ol, ul {
 	list-style: none;

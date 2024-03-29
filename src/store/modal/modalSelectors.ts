@@ -1,0 +1,1 @@
+export const selectModalStatus = (state: { modalSlice: { isOpen: boolean } }) => state.modalSlice.isOpen;

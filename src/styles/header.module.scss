@@ -2,7 +2,8 @@ header {
     width: 100%;
     height: 75px;
 
-    border-bottom: 2px solid var(--second); 
+    // border-bottom: 2px solid var(--second); 
+    box-shadow: 5px 0 10px rgba($color: var(--contrast), $alpha: .4);
 
 }
 
@@ -33,6 +34,18 @@ header {
         gap: 10px;
         border-right: 2px solid var(--second);
         padding-right: 15px;
+        & li {
+            cursor: pointer;
+            color: var(--contrast);
+            user-select: none;
+            padding-bottom: 3px;
+            transition: 0.1s all cubic-bezier(0.19, 1, 0.22, 1);
+            border-bottom: 1px solid transparent;
+        }
+        & li:hover {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+        }
     }
     & button {
         cursor: pointer;
