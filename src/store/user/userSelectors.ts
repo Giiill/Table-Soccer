@@ -1,0 +1,1 @@
+export const selectLoginStatus = (state: {userSlice: {status: boolean}}) => state.userSlice.status;
