@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 type Tournir = {
     name: string,
     date: string,
-    state: string,
-    players: number,
+    status: string,
+    number: number,
     id: number
 }
 
@@ -27,8 +27,8 @@ function UiTournirTable(props: PropsModalWindow) {
                 <UiTournir 
                     name = {tournir.name}
                     date = {tournir.date}
-                    state= {tournir.state}
-                    players= {tournir.players}
+                    status= {tournir.status}
+                    players= {tournir.number}
                     key= {tournir.id}
                     id= {tournir.id}
        />

@@ -19,10 +19,15 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+
 }
 .formChild label {
     display: block;
     margin-bottom: 5px;
+}
+
+.error {
+    color: red;
 }
 .formChild input {
     width: 100%;

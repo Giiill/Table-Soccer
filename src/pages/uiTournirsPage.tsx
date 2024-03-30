@@ -1,47 +1,35 @@
 import UiTournirTable from "../components/uiTournirTable";
-import { useLayoutEffect } from "react";
+import axios from 'axios';
+import { useState } from "react";
+import { useEffect } from "react";
+
+type Tournir = {
+  name: string,
+  date: string,
+  status: string,
+  number: number,
+  id: number
+}
 
 function UiTournirsPage() {
-    useLayoutEffect(() => {
+    useEffect(() => {
         window.scrollTo(0, 0)
-    });
-    let data = [{
-        name: "А",
-        date: "12.04.2024",
-        state: "В игре",
-        players: 32,
-        id: 512
-      },{
-        name: "Б",
-        date: "12.04.2024",
-        state: "В игре",
-        players: 32,
-        id: 513
-      },{
-        name: "В",
-        date: "12.04.2024",
-        state: "В игре",
-        players: 32,
-        id: 514
-      },{
-        name: "Г",
-        date: "12.04.2024",
-        state: "В игре",
-        players: 32,
-        id: 515
-      },{
-        name: "Д",
-        date: "12.04.2024",
-        state: "В игре",
-        players: 32,
-        id: 516
-      },{
-        name: "Е",
-        date: "12.04.2024",
-        state: "В игре",
-        players: 32,
-        id: 517
-      }]
+        getData();
+    },[]);
+  
+    const [data, setData] = useState<Tournir[]>([]);
+    const getData = async () => {
+      try {
+          axios.defaults.withCredentials = true;
+          const response = await axios.get('http://188.225.34.199:8000/tournirs');
+          if (response.status === 200) {
+              console.log(response.data)
+              setData(response.data["tour"])
+          }
+      } catch (error) {
+          console.log(error)
+      }
+  }
   return (
     <>
     <UiTournirTable 

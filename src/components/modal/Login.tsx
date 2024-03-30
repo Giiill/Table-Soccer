@@ -4,6 +4,9 @@ import { useState } from 'react';
 import axios from 'axios';
 import { FormEvent } from 'react';
 import { MD5 } from 'crypto-js';
+import { userSliceActions } from '../../store/user/userSlice';
+import { useDispatch } from "react-redux";
+import { modalSliceActions } from '../../store/modal/modalSlice';
 
 type PropsModalWindow = {
     isOpen: boolean,
@@ -11,8 +14,19 @@ type PropsModalWindow = {
 };
 
 function Login(props: PropsModalWindow) {
+    const dispatch = useDispatch();
+
+    const handleSendAutorizate = () => {
+      dispatch(userSliceActions.setLoginStatus())
+    };
+
+    const handleModalLog = () => {
+        dispatch(modalSliceActions.toggleAuthModal())
+    };
+
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
+    const [error,isError] = useState(false);
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         postData()
@@ -26,14 +40,14 @@ function Login(props: PropsModalWindow) {
                 username: {username},
                 password: {pass}
             });
-            console.log(response.data);
+            if (response.status === 200) {
+                handleSendAutorizate();
+                handleModalLog()
+                isError(false)
+            }
         } catch (error) {
-            console.log({
-                username: {username},
-                password: {password},
-                md5: {pass}
-            })
-            console.error(error);
+            console.log(error)
+            isError(true)
         }
     };
 
@@ -47,6 +61,7 @@ function Login(props: PropsModalWindow) {
         >
                 <div className={Style.container}>
                     <h2>Авторизация</h2>
+                    {(error) && <h3 className={Style.error}>Неправильный логин или пароль</h3>}
                     <form className={Style.formGroup} id="loginForm" onSubmit={handleSubmit}>
                         <div className={Style.formChild}>
                             <input 

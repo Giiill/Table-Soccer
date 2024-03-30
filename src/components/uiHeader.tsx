@@ -9,10 +9,22 @@ import { modalSliceActions } from "../store/modal/modalSlice";
 import Registration from "./modal/Registration";
 import { Link } from "react-router-dom";
 import  Menu  from '../components/modal/Menu';
+import { selectLoginStatus } from "../store/user/userSelectors";
+import { userSliceActions } from "../store/user/userSlice";
+import { useRef } from "react";
 
 function UiHeader() {
   const dispatch = useDispatch();
   const isOpen = useSelector(selectModalStatus);
+  const ref = useRef<HTMLDivElement>(null);
+
+
+  const scrollAboutUs = () => {
+      ref.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
+  } 
 
   const handleModalReg = () => {
     dispatch(modalSliceActions.toggleRegisterModal());
@@ -26,11 +38,11 @@ function UiHeader() {
     dispatch(modalSliceActions.toggleMenuModal());
   }
 
-  // const status = useSelector(selectLoginStatus);
+  const status = useSelector(selectLoginStatus);
 
-  // const handleSendAutorizate = () => {
-  //   dispatch(setLoginStatus())
-  // };
+  const handleSendAutorizate = () => {
+    dispatch(userSliceActions.setLoginStatus())
+  };
 
   return (
     <header>
@@ -40,13 +52,18 @@ function UiHeader() {
         </Link>
 
         <nav className={Style.nav}>
-
-          <button onClick={handleModalReg}>Регистрация</button>
-          <button onClick={handleModalLog}>Войти</button>
-          {/* <button onClick={handleSendAutorizate}>Создать матч</button> */}
-
+          {(status)?
+          <>
+          <button onClick={handleSendAutorizate}>Выход</button>
+          <button>Создать матч</button>
+            </>
+          :   <>        
+            <button onClick={handleModalReg}>Регистрация</button>
+            <button onClick={handleModalLog}>Войти</button>
+            </>
+          }
           <ul>
-            <li>О нас</li>
+            <li onClick={() => {scrollAboutUs()}}>О нас</li>
            <li> <Link to="/tournirs" className={Style.logo}>Турниры</Link></li>
             
           </ul>

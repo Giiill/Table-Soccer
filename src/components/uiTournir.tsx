@@ -8,7 +8,7 @@ import Style from "../styles/tournir.module.scss";
 type PropsModalWindow = {
     name: string,
     date: string,
-    state: string,
+    status: string,
     players: number,
     id: number
 
@@ -26,11 +26,11 @@ function UiTournir(props: PropsModalWindow) {
                 </div>
                 <div className={Style.element}>
                     <GiSoccerKick />
-                    <p>{props.state}</p>
+                    <p>{props.status}</p>
                 </div>
                 <div className={Style.element}>
                     <FaPeopleGroup />
-                    <p>{props.players} игрока</p>
+                    <p>{props.players}</p>
                 </div>
             </div>
             <p className={Style.more}>Подробнее <FaArrowAltCircleRight /></p>
