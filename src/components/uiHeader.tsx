@@ -7,7 +7,8 @@ import Login from "./modal/Login";
 import { selectModalStatus } from "../store/modal/modalSelectors";
 import { modalSliceActions } from "../store/modal/modalSlice";
 import Registration from "./modal/Registration";
-
+import { Link } from "react-router-dom";
+import  Menu  from '../components/modal/Menu';
 
 function UiHeader() {
   const dispatch = useDispatch();
@@ -21,6 +22,10 @@ function UiHeader() {
     dispatch(modalSliceActions.toggleAuthModal());
   }
 
+  const handleModalMenu = () => {
+    dispatch(modalSliceActions.toggleMenuModal());
+  }
+
   // const status = useSelector(selectLoginStatus);
 
   // const handleSendAutorizate = () => {
@@ -30,7 +35,9 @@ function UiHeader() {
   return (
     <header>
       <div className={[globalStyle.wrapper, Style.wrapper].join(" ")}>
-        <div className={Style.logo}><img src={Logo} alt="" /></div>
+        <Link to="/" className={Style.logo}>
+          <img src={Logo} alt="" />
+        </Link>
 
         <nav className={Style.nav}>
 
@@ -40,14 +47,16 @@ function UiHeader() {
 
           <ul>
             <li>О нас</li>
-            <li>Турниры</li>
+           <li> <Link to="/tournirs" className={Style.logo}>Турниры</Link></li>
+            
           </ul>
         </nav>
 
-        <button className={Style.burger}>
+        <button className={Style.burger} onClick={handleModalMenu}>
           <RxHamburgerMenu />
         </button>
       </div>
+      <Menu isOpen={isOpen.isMenuModalOpen} handleModal={handleModalMenu}/>
       <Login isOpen={isOpen.isAuthModalOpen} handleModal={handleModalLog} />
       <Registration isOpen={isOpen.isRegisterModalOpen} handleModal={handleModalReg} />
     </header>

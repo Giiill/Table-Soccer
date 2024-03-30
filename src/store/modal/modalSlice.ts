@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isAuthModalOpen: false,
   isRegisterModalOpen: false,
+  isMenuModalOpen: false,
 };
 
 const modalSlice = createSlice({
@@ -14,6 +15,9 @@ const modalSlice = createSlice({
     },
     toggleRegisterModal: (state) => {
       state.isRegisterModalOpen = !state.isRegisterModalOpen;
+    },
+    toggleMenuModal: (state) => {
+      state.isMenuModalOpen = !state.isMenuModalOpen;
     },
   },
 });

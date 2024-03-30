@@ -3,6 +3,7 @@ import Style from '../../styles/login.module.scss';
 import { useState } from 'react';
 import axios from 'axios';
 import { FormEvent } from 'react';
+import { MD5 } from 'crypto-js';
 
 type PropsModalWindow = {
     isOpen: boolean,
@@ -18,14 +19,20 @@ function Login(props: PropsModalWindow) {
     };
 
     const postData = async () => {
+        let pass = MD5(password).toString();
         try {
+            axios.defaults.withCredentials = true;
             const response = await axios.post('http://188.225.34.199:8000/auth', {
                 username: {username},
-                password: {password}
+                password: {pass}
             });
-    
             console.log(response.data);
         } catch (error) {
+            console.log({
+                username: {username},
+                password: {password},
+                md5: {pass}
+            })
             console.error(error);
         }
     };

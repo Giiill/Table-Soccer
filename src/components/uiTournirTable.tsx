@@ -1,32 +1,43 @@
 import Style from "../styles/tournir.module.scss";
 import globalStyle from "../styles/global.module.scss";
-import { GiBlackFlag } from "react-icons/gi";
 import UiTournir from "./uiTournir";
+import { Link } from "react-router-dom";
 
-function UiTournirTable() {
+type Tournir = {
+    name: string,
+    date: string,
+    state: string,
+    players: number,
+    id: number
+}
+
+type PropsModalWindow = {
+    data: Array<Tournir>, //[{},{},{}]
+    more: boolean
+
+};
+
+function UiTournirTable(props: PropsModalWindow) {
   return (
     <main className={Style.content}>
         <div className={[globalStyle.wrapper, Style.wrapper].join(" ")}>
             <h1>cписок последних турниров</h1>
             <hr />
-            <UiTournir 
-                name = "Белые медведи"
-                date = "12 февраля 2024"
-                state="В игре"
-                players= {32}
-            />
-            <UiTournir 
-                name = "Белые медведи"
-                date = "12 февраля 2024"
-                state="В игре"
-                players= {32}
-            />
-            <UiTournir 
-                name = "Белые медведи"
-                date = "12 февраля 2024"
-                state="В игре"
-                players= {32}
-            />
+            {props.data.map(tournir => (
+                <UiTournir 
+                    name = {tournir.name}
+                    date = {tournir.date}
+                    state= {tournir.state}
+                    players= {tournir.players}
+                    key= {tournir.id}
+                    id= {tournir.id}
+       />
+            ))}
+            {(props.more)?
+            <Link to="/tournirs" className={Style.link}>Посмотреть все</Link>:
+            <></>
+            }
+            
         </div>
     </main>
   );

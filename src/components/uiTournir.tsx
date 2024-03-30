@@ -1,21 +1,23 @@
 import { GiSoccerKick } from "react-icons/gi";
 import { BsCalendarDate } from "react-icons/bs";
 import { FaPeopleGroup } from "react-icons/fa6";
-import { CiCircleMore } from "react-icons/ci";
+import { FaArrowAltCircleRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import Style from "../styles/tournir.module.scss";
-import globalStyle from "../styles/global.module.scss";
 
 type PropsModalWindow = {
     name: string,
     date: string,
     state: string,
-    players: number
+    players: number,
+    id: number
 
 };
 
 function UiTournir(props: PropsModalWindow) {
+    let link = "/tournir/" + props.id;
     return (
-        <div className={Style.row}>
+        <Link to={link} className={Style.row}>
             <p>Турнир <br />"{props.name}"</p>
             <div className={Style.body}>
                 <div className={Style.element}>
@@ -31,8 +33,8 @@ function UiTournir(props: PropsModalWindow) {
                     <p>{props.players} игрока</p>
                 </div>
             </div>
-            <p className={Style.more}>Подробнее</p>
-        </div>
+            <p className={Style.more}>Подробнее <FaArrowAltCircleRight /></p>
+        </Link>
     );
 }
 
